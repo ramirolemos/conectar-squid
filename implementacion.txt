@@ -1,0 +1,25 @@
+
+
+
+mkdir -p /vol/share/cache -> debian
+mkdir -p /var/share/cache -> ubuntu
+
+chown -R proxy:proxy /vol/share/cache -> debian
+chown -R proxy:proxy /var/share/cache -> debian
+
+chmod 700 -R /vol/share/cache -> debian
+chmod 700 -R /var/share/cache -> ubuntu
+
+mv /etc/squid/squid.conf /etc/squid/squid.org.conf
+mv squid.conf /etc/squid/squid.conf
+
+service squid stop
+/etc/init.d/squid stop
+
+squid -z
+
+rm -R /var/spool/squid
+
+service squid start
+
+ 
