@@ -1,4 +1,5 @@
 
+Version 0.2
 
 mkdir -p /vol/share/cache/squid -> debian
 mkdir -p /var/share/cache/squid -> ubuntu
@@ -6,19 +7,20 @@ mkdir -p /var/share/cache/squid -> ubuntu
 chown -R proxy:proxy /vol/share/cache/squid -> debian
 chown -R proxy:proxy /var/share/cache/squid -> debian
 
-chmod 660 -R /vol/share/cache -> debian
-chmod 660 -R /var/share/cache -> ubuntu
+chmod 770 -R /vol/share/cache/squid -> debian
+chmod 770 -R /var/share/cache/squid -> ubuntu
 
 mv /etc/squid/squid.conf /etc/squid/squid.org.conf
 mv squid.conf /etc/squid/squid.conf
 
-service squid stop
-/etc/init.d/squid stop
+service squid stop -> Debian
+/etc/init.d/squid stop -> Ubuntu
 
 squid -z
 
 rm -R /var/spool/squid
 
-service squid start
+service squid start -> Debian
+/etc/init.d/squid start -> Ubuntu
 
  
