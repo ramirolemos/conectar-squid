@@ -171,7 +171,7 @@
        
            
            
-3.2.a -  Volver a la configuración anterior en caso de que haya habido un error en la implementación.
+3.2.a -  Volver a la configuración anterior en caso de que haya ocurrido un error en la implementación.
 
           Si por alguna razón hubo algún problema a la hora de implementar el archivo de configuración dado
           el paso 3.1.a nos tiene que devolver un valor diferente al mencionado.
