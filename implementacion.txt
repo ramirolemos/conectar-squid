@@ -1,26 +1,144 @@
+# Implementación Squid Version 0.2
 
-Version 0.2
 
-mkdir -p /vol/share/cache/squid -> debian
-mkdir -p /var/share/cache/squid -> ubuntu
+                                 Instructivo para Implementación Squid
 
-chown -R proxy:proxy /vol/share/cache/squid -> debian
-chown -R proxy:proxy /var/share/cache/squid -> debian
 
-chmod 770 -R /vol/share/cache/squid -> debian
-chmod 770 -R /var/share/cache/squid -> ubuntu
 
-mv /etc/squid/squid.conf /etc/squid/squid.org.conf
-mv squid.conf /etc/squid/squid.conf
 
-service squid stop -> Debian
-/etc/init.d/squid stop -> Ubuntu
 
-squid -z
+1 - Introducción:
 
-rm -R /var/spool/squid
+ Este Instructivo pretende estandarizar una configuración mínima y necesaria del proxy-cache Squid. Algunos procesos 
+ Como por ejemplo copiar un archivo a la maquina de servicios en el Sitema Operativo Debian o cambiar a superusuario 
+ (root) desde una consola tanto en Ubuntu como en Debian, fueron explicados en el Instructivo de implementación del 
+ firewall .
+ 
 
-service squid start -> Debian
-/etc/init.d/squid start -> Ubuntu
+
+2 - Implementación
+
+
+2.1.a  - Creación de directorios de trabajo.
+
+         Antes que nada para comenzar la configuración vamos estandarizar nuestros directorios de trabajo
+         que van a estar alojados en /vol/share para Debian, y en /var/share en Ubuntu, dado que de estos 
+         directorios son dejados de lado en el back up.
+         Luego: 
+         
+             Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
+             na de servicios:
+             
+             ~#mkdir -p /vol/share/cache/squid 
+     
+            
+             Si poseemos el sistema operativo Ubuntu ejecutamos el siguiente comando como root:
+     
+             ~#mkdir -p /var/share/cache/squid 
+     
+2.1.b - Cambio de propietario de directorios de trabajo.    
+        
+         Squid escribe con el usuario proxy que pertenece al grupo proxy, por lo tanto también tenemos que
+         cambiar el dueño y grupo de quien va a poder escribir, ejecutar y leer los archivos que esten den
+         tro de nuestro directorio de trabajo.
+         
+            
+             Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
+             na de servicios:
+
+             ~#chown -R proxy:proxy /vol/share/cache/squid 
+      
+             Si poseemos el sistema operativo Ubuntu ejecutamos el siguiente comando como root:
+      
+             ~#chown -R proxy:proxy /var/share/cache/squid 
+
+2.1.c - Cambio de permisos de directorios de trabajo.
+
+          Squid necesita permisos de ejecución,lectura y escritura tanto para su dueño como para el grupo,
+          luego vamos a asignarles los permisos necesarios para todos los archivos que se vayan a encon-
+          trar alojados en el directorio de trabajo:
+          
+
+             Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
+             na de servicios:
+            
+             ~#chmod 770 -R /vol/share/cache/squid 
+            
+             Si poseemos el sistema operativo Ubuntu ejecutamos el siguiente comando como root:
+            
+             ~#chmod 770 -R /var/share/cache/squid 
+            
+2.2.a - Back up archivo configuración actual.
+
+          Paso muy importante es realizar SIEMPRE un back up de la configuración que se encuentra funcional.
+          No solamente en este caso , sino en cualquier caso que se vaya a cambiar la configuración de un 
+          servicio.
+          
+             
+             Tanto en Debian (siendo root en la maquina de servicio), como en Ubuntu (siendo root), ejecutamos:
+
+             ~#mv /etc/squid/squid.conf /etc/squid/squid.org.conf
+
+
+2.2.b - Moviendo squid.conf descargado al directorio de configuración de Squid.
+
+         Ahora vamos a copiar el archivo de configuración descargado al directorio de configuración de Squid.
+         Nos situamos en el directorio donde está alojado el archivo de configuración descargado y tanto en 
+         Debian como en Ubuntu siendo root ejecutamos.
+
+             
+             ~#mv squid.conf /etc/squid/squid.conf
+
+
+2.3.a - Deteniendo Squid
+         
+         Vamos a detener el servicio de squid, para poder generar luego el directorio de trabajo.
+         
+
+             Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
+             na de servicios:
+           
+             ~#service squid stop 
+           
+             Si poseemos el sistema operativo Ubuntu ejecutamos el siguiente comando como root:
+           
+             ~#etc/init.d/squid stop 
+
+
+2.3.b - Rengenerando arbol de directorios para el alojamiento de archivos.
+
+         Para que Squid organice los archivos que va a utilizar vamos a tener que generar el arbol de direc
+         torios luego:
+          
+             Tanto en Debian como en Ubuntu siendo root ejecutamos:
+
+             ~#squid -z
+
+
+
+2.3.c - Iniciando Squid
+          
+          Iniciamos nuevamente squid para poder finalizar nuestra implementación
+          
+            Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
+            na de servicios:
+          
+          
+            ~#service squid start 
+        
+        
+        
+            Si poseemos el sistema operativo Ubuntu.
+        
+            
+            ~#/etc/init.d/squid start 
+
+
+
+2.3.d - Eliminando Directorio de trabajo antiguo.
+
+         
+
+         rm -R /var/spool/squid
 
  
