@@ -128,17 +128,71 @@
         
         
         
-            Si poseemos el sistema operativo Ubuntu.
+            Si poseemos el sistema operativo Ubuntu ejecutamos como root:
         
             
             ~#/etc/init.d/squid start 
 
 
 
-2.3.d - Eliminando Directorio de trabajo antiguo.
+3.1.a - Chequeando funcionamiento de Squid.
+          
+         Para saber squid está ejecutado o no ejecutamos 
+          
+            Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
+            na de servicios:
+           
+            ~#service squid status  
+           
+           
+            Si poseemos el sistema operativo Ubuntu ejecutamos como root:
+           
+           
+            ~#/etc/init.d/squid status
+            
+            
+            Luego si estos comandos nos devuelve
+            
+            [ ok ] squid is running.
+            
+            Quiere decir que nuestro servicio de squid fue ejecutado con éxito.
+            
+            
+3.1.b - Acceso a log squid 
 
+           Para leer el archivo de log de squid , quiere decir al informe de acceso que están teniendo los 
+           clientes de nuestra red al proxy y si este le está devolviendo el objeto desde el caché o bien 
+           le está yendo a "buscar" hacia Internet ejecutamos tanto el Ubuntu como Debian como root:
+           
+           ~#tail -f /var/log/squid/access.log 
+           
+           Para mayor información se puede dirigir a  http://wiki.squid-cache.org/SquidFaq/SquidLogs
+           
+       
+           
+           
+3.2.a -  Volver a la configuración anterior en caso de que haya habido un error en la implementación.
+
+          Si por alguna razón hubo algún problema a la hora de implementar el archivo de configuración dado
+          el paso 3.1.a nos tiene que devolver un valor diferente al mencionado.
+          Si esto así sucede vamos a restaurar el archivo que hicimos back up en el paso 2.2.a.
+          
+          Tanto en Debian (siendo root en la maquina de servicio), como en Ubuntu (siendo root), ejecutamos:
+
+             ~#mv /etc/squid/squid.conf.org /etc/squid/squid.conf
+
+          Luego realizamos 
+                                                                  
+             
+            ~#squid -k reconfigure
+           
+           
+            
+                                                     
          
 
-         rm -R /var/spool/squid
+                                                                              
+                                 
 
+                                                                                                   
  
