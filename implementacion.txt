@@ -1,27 +1,27 @@
-# Implementación Squid Version 0.2
+# Implementacion Squid Version 1.0
 
 
-                                 Instructivo para Implementación Squid
+                                 Instructivo para Implementacion Squid
 
 
 
 
 
-1 - Introducción:
+1 - Introduccion:
 
- Este Instructivo pretende estandarizar una configuración mínima y necesaria del proxy-cache Squid. Algunos procesos 
+ Este Instructivo pretende estandarizar una configuracion minima y necesaria del proxy-cache Squid. Algunos procesos 
  Como por ejemplo copiar un archivo a la maquina de servicios en el Sitema Operativo Debian o cambiar a superusuario 
- (root) desde una consola tanto en Ubuntu como en Debian, fueron explicados en el Instructivo de implementación del 
+ (root) desde una consola tanto en Ubuntu como en Debian, fueron explicados en el Instructivo de implementacion del 
  firewall .
  
 
 
-2 - Implementación
+2 - Implementacion
 
 
-2.1.a  - Creación de directorios de trabajo.
+2.1.a  - Creacion de directorios de trabajo.
 
-         Antes que nada para comenzar la configuración vamos estandarizar nuestros directorios de trabajo
+         Antes que nada para comenzar la configuracion vamos estandarizar nuestros directorios de trabajo
          que van a estar alojados en /vol/share para Debian, y en /var/share en Ubuntu, dado que de estos 
          directorios son dejados de lado en el back up.
          Luego: 
@@ -38,8 +38,8 @@
      
 2.1.b - Cambio de propietario de directorios de trabajo.    
         
-         Squid escribe con el usuario proxy que pertenece al grupo proxy, por lo tanto también tenemos que
-         cambiar el dueño y grupo de quien va a poder escribir, ejecutar y leer los archivos que esten den
+         Squid escribe con el usuario proxy que pertenece al grupo proxy, por lo tanto tambien tenemos que
+         cambiar el propietario y grupo de quien va a poder escribir, ejecutar y leer los archivos que esten den
          tro de nuestro directorio de trabajo.
          
             
@@ -54,7 +54,7 @@
 
 2.1.c - Cambio de permisos de directorios de trabajo.
 
-          Squid necesita permisos de ejecución,lectura y escritura tanto para su dueño como para el grupo,
+          Squid necesita permisos de ejecucion,lectura y escritura tanto para su propietario como para el grupo,
           luego vamos a asignarles los permisos necesarios para todos los archivos que se vayan a encon-
           trar alojados en el directorio de trabajo:
           
@@ -68,10 +68,10 @@
             
              ~#chmod 770 -R /var/share/cache/squid 
             
-2.2.a - Back up archivo configuración actual.
+2.2.a - Back up archivo configuracion actual.
 
-          Paso muy importante es realizar SIEMPRE un back up de la configuración que se encuentra funcional.
-          No solamente en este caso , sino en cualquier caso que se vaya a cambiar la configuración de un 
+          Paso muy importante es realizar SIEMPRE un back up de la configuracion que se encuentra funcional.
+          No solamente en este caso , sino en cualquier caso que se vaya a cambiar la configuracion de un 
           servicio.
           
              
@@ -80,10 +80,10 @@
              ~#mv /etc/squid/squid.conf /etc/squid/squid.org.conf
 
 
-2.2.b - Moviendo squid.conf descargado al directorio de configuración de Squid.
+2.2.b - Moviendo squid.conf descargado al directorio de configuracion de Squid.
 
-         Ahora vamos a copiar el archivo de configuración descargado al directorio de configuración de Squid.
-         Nos situamos en el directorio donde está alojado el archivo de configuración descargado y tanto en 
+         Ahora vamos a copiar el archivo de configuracion descargado al directorio de configuracion de Squid.
+         Nos situamos en el directorio donde esta alojado el archivo de configuracion descargado y tanto en 
          Debian como en Ubuntu siendo root ejecutamos.
 
              
@@ -118,7 +118,7 @@
 
 2.3.c - Iniciando Squid
           
-          Iniciamos nuevamente squid para poder finalizar nuestra implementación
+          Iniciamos nuevamente squid para poder finalizar nuestra implementacion
           
             Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
             na de servicios:
@@ -137,7 +137,7 @@
 
 3.1.a - Chequeando funcionamiento de Squid.
           
-         Para saber squid está ejecutado o no ejecutamos 
+         Para saber squid esta ejecutado o no ejecutamos 
           
             Si poseemos el sistema operativo Debian ejecutamos el siguiente comando como root en la maqui
             na de servicios:
@@ -155,27 +155,27 @@
             
             [ ok ] squid is running.
             
-            Quiere decir que nuestro servicio de squid fue ejecutado con éxito.
+            Quiere decir que nuestro servicio de squid fue ejecutado con exito.
             
             
 3.1.b - Acceso a log squid 
 
-           Para leer el archivo de log de squid , quiere decir al informe de acceso que están teniendo los 
-           clientes de nuestra red al proxy y si este le está devolviendo el objeto desde el caché o bien 
-           le está yendo a "buscar" hacia Internet ejecutamos tanto el Ubuntu como Debian como root:
+           Para leer el archivo de log de squid , quiere decir al informe de acceso que estan teniendo los 
+           clientes de nuestra red al proxy y si este le esta devolviendo el objeto desde el cache o bien 
+           le esta yendo a "buscar" hacia Internet ejecutamos tanto el Ubuntu como Debian como root:
            
            ~#tail -f /var/log/squid/access.log 
            
-           Para mayor información se puede dirigir a  http://wiki.squid-cache.org/SquidFaq/SquidLogs
+           Para mayor informacion se puede dirigir a  http://wiki.squid-cache.org/SquidFaq/SquidLogs
            
        
            
            
-3.2.a -  Volver a la configuración anterior en caso de que haya ocurrido un error en la implementación.
+3.2.a -  Volver a la configuracion anterior en caso de que haya ocurrido un error en la implementacion.
 
-          Si por alguna razón hubo algún problema a la hora de implementar el archivo de configuración dado
+          Si por alguna razon hubo algun problema a la hora de implementar el archivo de configuracion dado
           el paso 3.1.a nos tiene que devolver un valor diferente al mencionado.
-          Si esto así sucede vamos a restaurar el archivo que hicimos back up en el paso 2.2.a.
+          Si esto asi sucede vamos a restaurar el archivo que hicimos back up en el paso 2.2.a.
           
           Tanto en Debian (siendo root en la maquina de servicio), como en Ubuntu (siendo root), ejecutamos:
 
