@@ -13,7 +13,7 @@
  Como por ejemplo copiar un archivo a la maquina de servicios en el Sitema Operativo Debian o cambiar a superusuario 
  (root) desde una consola tanto en Ubuntu como en Debian, fueron explicados en el Instructivo de implementacion del 
  firewall .
- 
+ Se omiten acentos y enies para evitar incompatibilidades en la codificacion.
 
 
 2 - Implementacion
